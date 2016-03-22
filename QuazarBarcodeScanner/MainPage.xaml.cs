@@ -32,8 +32,7 @@ namespace QuazarBarcodeScanner
     public sealed partial class MainPage : Page
     {
 
-        // Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-     
+
        
         public MainPage()
         {
@@ -41,11 +40,7 @@ namespace QuazarBarcodeScanner
         }
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            /*
-            Windows.Storage.StorageFile barcodeFile = await storageFolder.CreateFileAsync("barcodes.txt", 
-                Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            await FileIO.AppendTextAsync(barcodeFile, "inside barcodeFile ");
-            */
+
             if (!MyFileManager.DoesBarcodeFileExist())
             {
                 await MyFileManager.SetTheBarcodeFile();
