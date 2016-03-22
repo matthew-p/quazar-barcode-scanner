@@ -15,8 +15,8 @@ namespace QuazarBarcodeScanner
         async public static Task SetTheBarcodeFile()
         {
             storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            barcodeFile = await storageFolder.CreateFileAsync("barcodes.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(barcodeFile, "In barcodeFile: ");
+            barcodeFile = await storageFolder.CreateFileAsync("barcodes.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
+            // await FileIO.WriteTextAsync(barcodeFile, "BarcodeFile:\n\r");
         }
 
         public static bool DoesBarcodeFileExist()
@@ -38,7 +38,7 @@ namespace QuazarBarcodeScanner
         }
         async public static Task WriteToBarcodeFile(string newBarcode)
         {
-            newBarcode = newBarcode + ", ";
+            newBarcode = newBarcode + ",\n\r";
             await FileIO.AppendTextAsync(barcodeFile, newBarcode);
         }
         async public static Task EmptyBarcodeFile()

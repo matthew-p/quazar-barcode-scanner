@@ -6,35 +6,5 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
-    <Page.Resources>
-        <Style TargetType="Button" x:Key="ButtonStyle" >
-            <Setter Property="Margin" Value="10,10,10,0" />
-        </Style>
 
-    </Page.Resources>
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Name="AlertTextBlock" Text="" />
-        <TextBlock 
-                   Name="OutputTextBlock" Text="Starting Output Text" />
-
-        <StackPanel Grid.Row="1">
-
-            <Button Name="DeleteButton" Content="Delete Scanned Codes" 
-                    Click="DeleteButton_Click" Style="{StaticResource ButtonStyle}" />
-            <Button Name="EmailButton" Content="Email Codes" 
-                    Click="EmailButton_Click" Style="{StaticResource ButtonStyle}" />
-            <Button Name="ScanButton" Content="Click To Scan Barcode" 
-                    Click="ScanButton_Click" Style="{StaticResource ButtonStyle}" />
-            <Button Name="ReadFirstBarcodeButton" Content="Read First Barcode" 
-                    Click="ReadFirstBarcodeButton_Click" Style="{StaticResource ButtonStyle}" />
-
-        </StackPanel>
-
-    </Grid>
 </Page>

@@ -8,16 +8,70 @@
     xmlns:zxing="using:ZXing.Mobile"
 
     mc:Ignorable="d">
-    <Grid>
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="ButtonStyle" >
+            <Setter Property="Margin" Value="10,15,10,15" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Frame Name="PrimaryFrame" Grid.Row="0" Grid.Column="0">
 
-        </Frame>
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="18" FontWeight="Bold" Name="TitleTextBlock"
+                   HorizontalAlignment="Center"
+                   Margin="10,10,10,10"
+                   Text="Quazar Barcode Scanner" />
+
+            <Button Name="DeleteButton" Content="Delete Scanned Codes" 
+                    Click="DeleteButton_Click" Style="{StaticResource ButtonStyle}" />
+            <Button Name="EmailButton" Content="Email Codes" 
+                    Click="EmailButton_Click" Style="{StaticResource ButtonStyle}" />
+            <Button Name="ShowBarcodesButton" Content="Show Stored Barcodes" 
+                    Click="ShowBarcodesButton_Click" Style="{StaticResource ButtonStyle}" />
+            <Button Name="ScanButton" Content="Click To Scan Barcode" 
+                    Click="ScanButton_Click" Style="{StaticResource ButtonStyle}" />
+
+        </StackPanel>
+        <ScrollViewer Grid.Row="1"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Stored Barcodes:\n\r" Margin="10,10,10,10"/>
+                <TextBlock Name="OutputTextBlock"
+                       Margin="10,10,10,10"
+                       TextWrapping="WrapWholeWords"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Name="Overlay" Visibility="Collapsed">
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="1" Foreground="White" FontSize="18" Text="Touch Screen to Focus" />
+                <Button Background="Black" Foreground="White" 
+                        Grid.Row="2" Grid.Column="0" Style="{StaticResource ButtonStyle}"
+                        Name="ButtonCancel">Cancel</Button>
+                <Button Background="Black" Foreground="White" 
+                        Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonStyle}"
+                        Name="ButtonTorch">Flashlight</Button>
+            </Grid>
+        </Grid>
+
     </Grid>
 
 </Page>
