@@ -41,26 +41,32 @@ namespace QuazarBarcodeScanner
             // create a new instance of the scanner
             scanner = new MobileBarcodeScanner(this.Dispatcher);
             scanner.Dispatcher = this.Dispatcher;
-            /*
-            if (customOverlayElement == null)
-            {
-                customOverlayElement = this.Overlay.Children[0];
-                this.Overlay.Children.RemoveAt(0);
-            }
 
-            scanner.CustomOverlay = customOverlayElement;
-            scanner.UseCustomOverlay = true;
-            */
         }
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
             if (!MyFileManager.DoesBarcodeFileExist())
             {
                 await MyFileManager.SetTheBarcodeFile();
             }
-
-            // PrimaryFrame.Navigate(typeof(ControlPage));
+            if (MyFileManager.DoesBarcodeFileExist())
+            {
+                string fileContent = await MyFileManager.ReadOutBarcodeFile();
+                if (String.IsNullOrEmpty(fileContent))
+                {
+                    if (DeleteButton.Visibility == Visibility.Visible)
+                        DeleteButton.Visibility = Visibility.Collapsed;
+                    if (EmailButton.Visibility == Visibility.Visible)
+                        EmailButton.Visibility = Visibility.Collapsed;
+                }
+                else if (!String.IsNullOrEmpty(fileContent))
+                {
+                    if (DeleteButton.Visibility == Visibility.Collapsed)
+                        DeleteButton.Visibility = Visibility.Visible;
+                    if (EmailButton.Visibility == Visibility.Collapsed)
+                        EmailButton.Visibility = Visibility.Visible;
+                }
+            }
         }
         /*
         async private void ScanButton_Click(object sender, RoutedEventArgs e)
@@ -89,7 +95,7 @@ namespace QuazarBarcodeScanner
 
         }
         */
-        private void buttonScanCustom_Click(object sender, RoutedEventArgs e)
+        private void ScanButton_Click(object sender, RoutedEventArgs e)
         {
             //Get our UIElement from the MainPage.xaml (this) file 
             // to use as our custom overlay
@@ -103,10 +109,6 @@ namespace QuazarBarcodeScanner
             this.ButtonCancel.Click += (s, e2) =>
             {
                 scanner.Cancel();
-            };
-            this.ButtonTorch.Click += (s, e2) =>
-            {
-                scanner.ToggleTorch();
             };
 
             //Set our custom overlay and enable it
@@ -129,21 +131,32 @@ namespace QuazarBarcodeScanner
 
             if (result != null && !string.IsNullOrEmpty(result.Text))
             {
-                string scannedCode = result.Text + ",\n\r";
                 msg = "Found Barcode: " + result.Text;
-                await MyFileManager.WriteToBarcodeFile(scannedCode);
-            }
-
-            else
-                msg = "Scanning Canceled!";
-
-            await MessageBox(msg);
+                await MyFileManager.WriteToBarcodeFile(result.Text);
+                if (DeleteButton.Visibility == Visibility.Collapsed)
+                {
+                    DeleteButton.Visibility = Visibility.Visible;
+                }
+                if (EmailButton.Visibility == Visibility.Collapsed)
+                {
+                    EmailButton.Visibility = Visibility.Visible;
+                }
+                await MessageBox(msg);
+            }        
 
         }
         async private void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             string barcodesFromFile = await MyFileManager.ReadOutBarcodeFile();
-            await ComposeEmail(barcodesFromFile);
+            if (!String.IsNullOrEmpty(barcodesFromFile))
+            {
+                await ComposeEmail(barcodesFromFile);
+            }
+            else
+            {
+                await MessageBox("No barcodes stored to email!");
+            }
+            
         }
 
         private async Task ComposeEmail(string messageBody)
@@ -170,6 +183,8 @@ namespace QuazarBarcodeScanner
                 if ((int)result.Id == 0)
                 {
                     await MyFileManager.EmptyBarcodeFile();
+                    DeleteButton.Visibility = Visibility.Collapsed;
+                    EmailButton.Visibility = Visibility.Collapsed;
                 }
             }
             else if (String.IsNullOrEmpty(fileContents))
@@ -182,7 +197,7 @@ namespace QuazarBarcodeScanner
         async private void ShowBarcodesButton_Click(object sender, RoutedEventArgs e)
         {
             string fileContent = await MyFileManager.ReadOutBarcodeFile();
-            OutputTextBlock.Text = "ShowBarcodes button, File contents: " + fileContent;
+            OutputTextBlock.Text = fileContent;
 
         }
 
