@@ -49,24 +49,7 @@ namespace QuazarBarcodeScanner
             {
                 await MyFileManager.SetTheBarcodeFile();
             }
-            if (MyFileManager.DoesBarcodeFileExist())
-            {
-                string fileContent = await MyFileManager.ReadOutBarcodeFile();
-                if (String.IsNullOrEmpty(fileContent))
-                {
-                    if (DeleteButton.Visibility == Visibility.Visible)
-                        DeleteButton.Visibility = Visibility.Collapsed;
-                    if (EmailButton.Visibility == Visibility.Visible)
-                        EmailButton.Visibility = Visibility.Collapsed;
-                }
-                else if (!String.IsNullOrEmpty(fileContent))
-                {
-                    if (DeleteButton.Visibility == Visibility.Collapsed)
-                        DeleteButton.Visibility = Visibility.Visible;
-                    if (EmailButton.Visibility == Visibility.Collapsed)
-                        EmailButton.Visibility = Visibility.Visible;
-                }
-            }
+
         }
         /*
         async private void ScanButton_Click(object sender, RoutedEventArgs e)
@@ -133,14 +116,6 @@ namespace QuazarBarcodeScanner
             {
                 msg = "Found Barcode: " + result.Text;
                 await MyFileManager.WriteToBarcodeFile(result.Text);
-                if (DeleteButton.Visibility == Visibility.Collapsed)
-                {
-                    DeleteButton.Visibility = Visibility.Visible;
-                }
-                if (EmailButton.Visibility == Visibility.Collapsed)
-                {
-                    EmailButton.Visibility = Visibility.Visible;
-                }
                 await MessageBox(msg);
             }        
 
@@ -183,8 +158,7 @@ namespace QuazarBarcodeScanner
                 if ((int)result.Id == 0)
                 {
                     await MyFileManager.EmptyBarcodeFile();
-                    DeleteButton.Visibility = Visibility.Collapsed;
-                    EmailButton.Visibility = Visibility.Collapsed;
+                    OutputTextBlock.Text = "";
                 }
             }
             else if (String.IsNullOrEmpty(fileContents))

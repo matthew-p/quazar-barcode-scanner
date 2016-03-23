@@ -63,7 +63,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="1" Foreground="White" 
-                           Grid.ColumnSpan="2"
+                           Grid.ColumnSpan="2" Margin="5,0,0,0"
                            FontSize="18" TextWrapping="WrapWholeWords"
                            FontWeight="Bold" Text="Touch Screen to Focus" />
                 <Button Background="DarkSlateGray" Foreground="White" 

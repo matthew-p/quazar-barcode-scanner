@@ -114,13 +114,19 @@
     <None Include="QuazarBarcodeScanner_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\quazarLogo150x150.png" />
+    <Content Include="Assets\quazarLogo24x24.scale-100.png" />
+    <Content Include="Assets\quazarLogo300x300.png" />
+    <Content Include="Assets\quazarLogo310x150.scale-100.png" />
+    <Content Include="Assets\quazarLogo44x44.png" />
+    <Content Include="Assets\quazarLogo50x50.png" />
+    <Content Include="Assets\quazarLogo620x300.png" />
+    <Content Include="Assets\quazarLogo71x71.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
