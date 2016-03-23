@@ -1,0 +1,3 @@
+MainPackage=C:\Users\m\Dropbox\visual-studio-2015\projects\universal\QuazarBarcodeScanner\QuazarBarcodeScanner\bin\ARM\Release\Upload\QuazarBarcodeScanner_1.1.4.0_ARM.appx
+SymbolPackage=C:\Users\m\Dropbox\visual-studio-2015\projects\universal\QuazarBarcodeScanner\QuazarBarcodeScanner\AppPackages\QuazarBarcodeScanner_1.1.4.0\QuazarBarcodeScanner_1.1.4.0_ARM.appxsym
+ResourcePack=C:\Users\m\Dropbox\visual-studio-2015\projects\universal\QuazarBarcodeScanner\QuazarBarcodeScanner\_scale-100.appx
